@@ -31,6 +31,8 @@ public class Text {
   public void show() {
     fill(0);
     textSize(26); 
+      
+textLeading(5);
     text(this.t, PosX, PosY);
    
     if(this.isHovering()==true){

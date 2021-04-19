@@ -16,9 +16,7 @@
 
 public void button1_click1(GButton source, GEvent event) { //_CODE_:button1:822108:
 
-  if (window!=1) {
-    window=1;
-  }
+  window=6;
 
 
 
@@ -40,34 +38,128 @@ public void button2_click1(GButton source, GEvent event) { //_CODE_:viewCards:77
 } //_CODE_:viewCards:777159:
 
 public void button3_click1(GButton source, GEvent event) { //_CODE_:CardCreator:201335:
- 
- int addIndex=0;
- addIndex=cards.getTotal();
+ ArrayList d;
+
 tFront= new Text(textfield1.getText(),325,125,false);
-  tBack= new Text(textfield2.getText(),325,225,false);
- c= new card();
+ tBack= new Text(textfield2.getText(),325,225,false);
+ c= new card(1);
   println("Tfront"+textfield1.getText());
  println("tBack"+textfield2.getText());
  c.addFront(tFront);
  c.addBack(tBack);
- cards.addCard(c);
+ 
+
+for(int i=0; i < All.getAllCardStorage().size(); i++){
+All.getAllCardStorage().get(i).addCard(c);
+
+}
+ //cards.addCard(c);
 
  
 } //_CODE_:CardCreator:201335:
 
 public void button2_click2(GButton source, GEvent event) { //_CODE_:button2:535023:
-   cards.switchSide(CardCounter);
+   All.getCardStorage().switchSide(CardCounter);
 } //_CODE_:button2:535023:
 
 public void button3_click2(GButton source, GEvent event) { //_CODE_:button3:813560:
-if(CardCounter >0 && CardCounter <= cards.getTotal());
+if(CardCounter >0 && CardCounter <=  All.getCardStorage().getTotal());
 CardCounter++;
 } //_CODE_:button3:813560:
 
 public void button4_click1(GButton source, GEvent event) { //_CODE_:button4:904502:
- if(CardCounter >0 && CardCounter <= cards.getTotal());
+ if(CardCounter >0 && CardCounter <=  All.getCardStorage().getTotal());
  CardCounter--;
 } //_CODE_:button4:904502:
+
+public void button5_click1(GButton source, GEvent event) { //_CODE_:button5:402011:
+  window=3;
+} //_CODE_:button5:402011:
+
+public void button7_click1(GButton source, GEvent event) { //_CODE_:button7:466897:
+  window=4;
+} //_CODE_:button7:466897:
+
+public void textfield3_change1(GTextField source, GEvent event) { //_CODE_:CreateCardPack:628114:
+  println("CreateCardPack - GTextField >> GEvent." + event + " @ " + millis());
+} //_CODE_:CreateCardPack:628114:
+
+public void button8_click1(GButton source, GEvent event) { //_CODE_:CreateCardPackButton:516993:
+ 
+ CardStorage j=new CardStorage(CreateCardPack.getText());
+
+} //_CODE_:CreateCardPackButton:516993:
+
+public void button6_click1(GButton source, GEvent event) { //_CODE_:button6:396099:
+ 
+ CardCounter=0;
+ window=5;
+
+ 
+} //_CODE_:button6:396099:
+
+public void button8_click2(GButton source, GEvent event) { //_CODE_:button8:582751:
+
+
+
+for(int i=0; i<  All.getAllCardStorage().size(); i++){
+  
+    //CardPackFileWriter(String n, ArrayList<CardStorage> l) {
+test=new CardPackFileWriter(All.getAllCardStorage().get(i).getCardPackname(),All.getAllCardStorage().get(i));
+
+  
+  
+  
+}
+
+
+//test= new CardPackFileWriter(All.getCardStorage().getCardPackname(),All.getAllCardStorage());
+  
+  
+  
+  
+} //_CODE_:button8:582751:
+
+public void button9_click1(GButton source, GEvent event) { //_CODE_:button9:581991:
+  window=1;
+} //_CODE_:button9:581991:
+
+public void button10_click1(GButton source, GEvent event) { //_CODE_:button10:998751:
+  window=7;
+} //_CODE_:button10:998751:
+
+public void textfield3_change2(GTextField source, GEvent event) { //_CODE_:textfield3:796097:
+
+} //_CODE_:textfield3:796097:
+
+public void textfield4_change1(GTextField source, GEvent event) { //_CODE_:textfield4:748855:
+
+} //_CODE_:textfield4:748855:
+
+public void textfield5_change1(GTextField source, GEvent event) { //_CODE_:textfield5:415581:
+  
+} //_CODE_:textfield5:415581:
+
+public void button11_click1(GButton source, GEvent event) { //_CODE_:button11:639246:
+  ArrayList d;
+
+
+ c= new cardtype2(2,textfield4.getText());
+ Text front= new Text(textfield3.getText(),125,100,false);
+ Text back= new Text(textfield5.getText(),130,100,false);
+  println("Tfront"+textfield1.getText());
+ println("tBack"+textfield2.getText());
+ c.addFront(front);
+ c.addFront(back);
+ 
+
+for(int i=0; i < All.getAllCardStorage().size(); i++){
+All.getAllCardStorage().get(i).addCard(c);
+
+}
+ 
+ 
+} //_CODE_:button11:639246:
 
 
 
@@ -81,16 +173,16 @@ public void createGUI(){
   button1 = new GButton(this, 10, 30, 80, 30);
   button1.setText("Create New Card");
   button1.addEventHandler(this, "button1_click1");
-  textfield1 = new GTextField(this, 120, 64, 270, 50, G4P.SCROLLBARS_NONE);
+  textfield1 = new GTextField(this, 118, 68, 270, 50, G4P.SCROLLBARS_NONE);
   textfield1.setOpaque(true);
   textfield1.addEventHandler(this, "textfield1_change1");
-  textfield2 = new GTextField(this, 120, 150, 270, 50, G4P.SCROLLBARS_NONE);
+  textfield2 = new GTextField(this, 120, 134, 270, 50, G4P.SCROLLBARS_NONE);
   textfield2.setOpaque(true);
   textfield2.addEventHandler(this, "textfield2_change1");
-  viewCards = new GButton(this, 11, 81, 80, 30);
+  viewCards = new GButton(this, 8, 80, 80, 30);
   viewCards.setText("view Cards");
   viewCards.addEventHandler(this, "button2_click1");
-  CardCreator = new GButton(this, 392, 228, 80, 30);
+  CardCreator = new GButton(this, 419, 227, 80, 30);
   CardCreator.setText("Create");
   CardCreator.addEventHandler(this, "button3_click1");
   button2 = new GButton(this, 224, 400, 80, 30);
@@ -102,6 +194,43 @@ public void createGUI(){
   button4 = new GButton(this, 464, 400, 80, 30);
   button4.setText("Previous Card");
   button4.addEventHandler(this, "button4_click1");
+  button5 = new GButton(this, 8, 364, 80, 30);
+  button5.setText("Save Card Pack");
+  button5.addEventHandler(this, "button5_click1");
+  button7 = new GButton(this, 7, 304, 80, 30);
+  button7.setText("Create Card Pack");
+  button7.addEventHandler(this, "button7_click1");
+  CreateCardPack = new GTextField(this, 236, 86, 270, 51, G4P.SCROLLBARS_NONE);
+  CreateCardPack.setOpaque(true);
+  CreateCardPack.addEventHandler(this, "textfield3_change1");
+  CreateCardPackButton = new GButton(this, 423, 168, 80, 30);
+  CreateCardPackButton.setText("Create");
+  CreateCardPackButton.addEventHandler(this, "button8_click1");
+  button6 = new GButton(this, 319, 402, 80, 30);
+  button6.setText("View");
+  button6.addEventHandler(this, "button6_click1");
+  button8 = new GButton(this, 249, 211, 108, 52);
+  button8.setText("Save Card Pack to folder");
+  button8.addEventHandler(this, "button8_click2");
+  button9 = new GButton(this, 191, 24, 80, 30);
+  button9.setText("Create Normal Card");
+  button9.addEventHandler(this, "button9_click1");
+  button10 = new GButton(this, 288, 24, 106, 30);
+  button10.setText("Create Fill In the Blank Card");
+  button10.addEventHandler(this, "button10_click1");
+  togGroup3 = new GToggleGroup();
+  textfield3 = new GTextField(this, 121, 87, 367, 44, G4P.SCROLLBARS_NONE);
+  textfield3.setOpaque(true);
+  textfield3.addEventHandler(this, "textfield3_change2");
+  textfield4 = new GTextField(this, 123, 184, 356, 33, G4P.SCROLLBARS_NONE);
+  textfield4.setOpaque(true);
+  textfield4.addEventHandler(this, "textfield4_change1");
+  textfield5 = new GTextField(this, 122, 254, 341, 65, G4P.SCROLLBARS_NONE);
+  textfield5.setOpaque(true);
+  textfield5.addEventHandler(this, "textfield5_change1");
+  button11 = new GButton(this, 547, 277, 80, 30);
+  button11.setText("Create");
+  button11.addEventHandler(this, "button11_click1");
 }
 
 // Variable declarations 
@@ -114,3 +243,16 @@ GButton CardCreator;
 GButton button2; 
 GButton button3; 
 GButton button4; 
+GButton button5; 
+GButton button7; 
+GTextField CreateCardPack; 
+GButton CreateCardPackButton; 
+GButton button6; 
+GButton button8; 
+GButton button9; 
+GButton button10; 
+GToggleGroup togGroup3; 
+GTextField textfield3; 
+GTextField textfield4; 
+GTextField textfield5; 
+GButton button11; 
